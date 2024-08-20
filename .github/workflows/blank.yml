@@ -1,0 +1,49 @@
+# Encryption function for Vigenere Cypher
+# Takes Plaintext and Key as input, and returns encrypted text as output
+#plaintext = "HELLO WORLD"
+#key = "KEY"
+#encrypted = "RIJVS UYVJN"
+def vigenere_encrypt(plaintext: str, key: str) -> str:
+  key = key.upper()
+  plaintext = plaintext.upper()
+
+  key_length = len(key)
+  ciphertext = []
+
+  key_index = 0
+  for char in plaintext:
+    if char.isalpha():
+      #Perform encryption
+      shift = ord(key[key_index % key_length]) - ord('A')
+      encrypted_char = chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+      ciphertext.append(encrypted_char)
+      key_index += 1
+    else:
+      ciphertext.append(char)
+
+  return ''.join(ciphertext)
+
+vigenere_encrypt('HELLO WORLD','KEY')
+R
+def vigenere_decrypt(ciphertext: str, key: str) -> str:
+  key = key.upper()
+  ciphertext = ciphertext.upper()
+
+  key_length = len(key)
+  plaintext = []
+
+  key_index = 0
+  for char in ciphertext:
+    if char.isalpha():
+      #Perform encryption
+      shift = ord(key[key_index % key_length]) - ord('A')
+      decrypted_char = chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+      plaintext.append(decrypted_char)
+      key_index += 1
+    else:
+      plaintext.append(char)
+
+  return ''.join(plaintext)
+
+vigenere_decrypt('RIJVS UYVJN','KEY')
+HELLO WORLD
